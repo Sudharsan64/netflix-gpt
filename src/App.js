@@ -1,13 +1,12 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import { Body } from './component/Body'
+import Browser from './component/Browser'
 
-function App() {
+const App = () => {
+  
   return (
-    <div >
-      <h1 className='text-3xl font-bold text-red-600'
-      >hellow welcome o the netflixt gpt</h1>
-    </div>
-  );
-}
+    <div><Body/></div>
+  )
+};
 
-export default App;
+export default App
