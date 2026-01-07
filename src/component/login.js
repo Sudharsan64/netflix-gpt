@@ -2,17 +2,20 @@ import React from 'react'
 import Header from './Header'
 import Validate from '../utils/Validate'
 import { useRef } from 'react'
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from '../utils/firebase';
 import { useNavigate } from 'react-router-dom';
+import { addUser } from '../utils/userSlice';
+
 const Login = () => {
+  const dispatch=useNavigate();
   const navigate = useNavigate(); // Correctly invoke the hook
   const [isSignIn, setIsSignIn] = React.useState(true);
   const toggleSignInForm = () => {
     setIsSignIn(!isSignIn);
   }
   const [errormessage, setErrormessage] = React.useState("");
-  const Username = useRef(null);
+  const name = useRef(null);
   const email = useRef(null);
   const password = useRef(null);
   const handleButtonClick = () => {
@@ -25,8 +28,16 @@ const Login = () => {
       createUserWithEmailAndPassword(auth, email.current.value, password.current.value)
         .then((userCredential) => {
           const user = userCredential.user;
+          updateProfile(user, {
+  displayName: name.current.value,
+    photoURL: "https://avatars.githubusercontent.com/u/176802327?s=400&u=225126d3da96d57f5c265c674ec7d627f11eb95a&v=4"
+}).then(() => {
+  navigate('/Browser');
+}).catch((error) => {
+   setErrormessage(error.message);
+}); 
           console.log(user);
-          navigate('/'); // Correct function call
+           // Correct function call
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -37,8 +48,14 @@ const Login = () => {
       // Sign In Logic
       signInWithEmailAndPassword(auth, email.current.value, password.current.value)
         .then((userCredential) => {
-          const user = userCredential.user;
-          console.log(user);
+          const { uid, email, displayName, photoURL } = auth.currentUser;
+          dispatch(addUser({
+            uid: uid,
+            email: email,
+            displayName: displayName,
+            photoURL: photoURL
+          }));
+          console.log(auth.currentUser);
           navigate('/Browser'); // Correct function call
         })
         .catch((error) => {
@@ -56,7 +73,7 @@ const Login = () => {
         <h1 className='font-bold text-4xl m-4
         '>{isSignIn ? 'Sign In' : 'Sign Up'} </h1>
         {!isSignIn &&
-          <input ref={Username} className='p-2 bg-gray-600 text-white rounded-lg' type="text"
+          <input ref={name} className='p-2 bg-gray-600 text-white rounded-lg' type="text"
             placeholder='Username' />}
         <br />
         <input ref={email} className='p-2 bg-gray-600 text-white rounded-lg'
