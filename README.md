@@ -7,6 +7,15 @@
 * useRef hook
 * implement the signin api
 * create the redux store with userslice. 
+* implement the user profile and diaplayname and photourl in the bowere when login 
+* update the profile 
+* get data form tmdb api
+*  custome hook for nowplayingmovies
+* create movieSlice
+* update the movies with movies data
+* Fetching trailerVideo
+* Embaded the youtube vidio embaded with autoplay & mute
+* Use tailwing to mate the trailer video to look awesome
 
 # features
 - login/signup page

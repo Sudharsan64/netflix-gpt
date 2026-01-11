@@ -4,12 +4,14 @@ import Validate from '../utils/Validate'
 import { useRef } from 'react'
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from '../utils/firebase';
-import { useNavigate } from 'react-router-dom';
+
 import { addUser } from '../utils/userSlice';
+import { useDispatch } from 'react-redux';
+import { user_Avathar_url } from '../utils/constants';
 
 const Login = () => {
-  const dispatch=useNavigate();
-  const navigate = useNavigate(); // Correctly invoke the hook
+  const dispatch = useDispatch();
+ // Correctly invoke the hook
   const [isSignIn, setIsSignIn] = React.useState(true);
   const toggleSignInForm = () => {
     setIsSignIn(!isSignIn);
@@ -30,9 +32,9 @@ const Login = () => {
           const user = userCredential.user;
           updateProfile(user, {
   displayName: name.current.value,
-    photoURL: "https://avatars.githubusercontent.com/u/176802327?s=400&u=225126d3da96d57f5c265c674ec7d627f11eb95a&v=4"
+    photoURL: user_Avathar_url
 }).then(() => {
-  navigate('/Browser');
+  
 }).catch((error) => {
    setErrormessage(error.message);
 }); 
@@ -56,7 +58,7 @@ const Login = () => {
             photoURL: photoURL
           }));
           console.log(auth.currentUser);
-          navigate('/Browser'); // Correct function call
+         
         })
         .catch((error) => {
           const errorCode = error.code;
