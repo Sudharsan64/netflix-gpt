@@ -38,7 +38,7 @@ const Login = () => {
 }).catch((error) => {
    setErrormessage(error.message);
 }); 
-          console.log(user);
+          
            // Correct function call
         })
         .catch((error) => {
@@ -57,7 +57,7 @@ const Login = () => {
             displayName: displayName,
             photoURL: photoURL
           }));
-          console.log(auth.currentUser);
+          
          
         })
         .catch((error) => {
