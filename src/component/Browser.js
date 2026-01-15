@@ -7,15 +7,15 @@ import usePopularMovies from '../hooks/usePopularMovies';
 import useTopratedMovies from '../hooks/useTopratedMovies';
 import useUpcomingMovies from '../hooks/useUpcomingMovies';
 const Browser = () => {
- useNowPlayingMovies();
- usePopularMovies();
- useTopratedMovies();
- useUpcomingMovies();
+  useNowPlayingMovies();
+  usePopularMovies();
+  useTopratedMovies();
+  useUpcomingMovies();
   return (
-    <div>
+    <div className='bg-black min-h-screen'>
       <Header />
-    <Maincontainer/>
-    <Secondarycontainer/>
+      <Maincontainer />
+      <Secondarycontainer />
     </div>
   )
 }

@@ -9,9 +9,10 @@ const Maincontainer = () => {
   const mainMovie = movies[0];
   const { original_title, overview, id } = mainMovie;
   return (
-    <div className='w-screen relative aspect-video'>
-      <VideoTitle title={original_title} overview={overview} />
+    <div className='w-screen relative aspect-video h-[100vh] overflow-hidden'>
       <BackgroundVideo movieid={id} />
+      <VideoTitle title={original_title} overview={overview} />
+      
     </div>
   )
 }
